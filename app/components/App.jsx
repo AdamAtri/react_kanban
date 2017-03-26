@@ -1,10 +1,10 @@
 import React from 'react';
 import uuid from 'uuid';
 import Notes from './Notes';
+import connect from '../libs/connect';
 import AutoFocusTextInput from './AutoFocusTextInput';
 
-// export default () => <Notes />;
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +28,7 @@ export default class App extends React.Component {
     const { notes } = this.state;
     return (
       <div>
+        {this.props.test}
         <AutoFocusTextInput
           onCreate={ this.addNote }/>
         <Notes
@@ -37,6 +38,10 @@ export default class App extends React.Component {
           onEdit={ this.editNote } />
       </div>
     );
+  }
+
+  addLane = () => {
+    this.props.laneActions.create({name: 'New Lane'});
   }
 
   addNote = (task) => {
@@ -80,3 +85,7 @@ export default class App extends React.Component {
     });
   }
 }
+
+export default connect(() => ({
+  test: 'test'
+}))(App)
