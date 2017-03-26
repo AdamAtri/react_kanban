@@ -40,6 +40,7 @@ export default class App extends React.Component {
   }
 
   addNote = (task) => {
+    if (! task || task.length == 0) return;
     this.setState({
       notes: this.state.notes.concat([
         { id:uuid.v4(), task:task, editing:false }

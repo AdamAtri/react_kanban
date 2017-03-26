@@ -31,7 +31,8 @@ export default class CustomTextInput extends React.Component {
           ref={(input) => { this.textInput = input; }} />
         <input
           type="button"
-          value="Focus the text input"
+          className="add-note"
+          value="+"
           onClick={ this._onClick } />
       </div>
     );

@@ -1,20 +1,23 @@
 import React from 'react';
+import classnames from 'classnames';
 
 // Provide a interface for editing a text value
-const Editable = ({editing, value, onEdit, ...props}) => {
+const Editable = ({editing, value, onEdit, className, ...props}) => {
   if (editing) {
-    return <Editable.Edit
+    return <Editable.Edit className={className}
             value={value} onEdit={onEdit} {...props}/>;
   }
-  return <Editable.Value value={value} />;
+  return <Editable.Value className={classnames('value', className)}
+          value={value} {...props}/>;
 };
 
 // Edit Class provides a text input Component for editing a string value
 class Edit extends React.Component {
   render() {
-    const { value, onEdit, ...props } = this.props;
+    const { value, onEdit, className, ...props } = this.props;
     return <input
               type="text"
+              className={classnames('edit', className)}
               autoFocus={true}
               defaultValue={value}
               onBlur={this.finishedEdit}
