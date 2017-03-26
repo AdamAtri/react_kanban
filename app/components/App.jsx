@@ -5,30 +5,11 @@ import connect from '../libs/connect';
 import AutoFocusTextInput from './AutoFocusTextInput';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notes: [
-        {
-          //id: '444',
-          id: uuid.v4(),
-          task: 'Learn some shit',
-          editing: false
-        }, {
-          //id: '555',
-          id: uuid.v4(),
-          task: 'Do some shit',
-          editing: false
-        }
-      ]
-    };
-  }
 
   render() {
-    const { notes } = this.state;
+    const { notes } = this.props;
     return (
       <div>
-        {this.props.test}
         <AutoFocusTextInput
           onCreate={ this.addNote }/>
         <Notes
@@ -86,6 +67,6 @@ class App extends React.Component {
   }
 }
 
-export default connect(() => ({
-  test: 'test'
+export default connect(({notes}) => ({
+  notes
 }))(App)
