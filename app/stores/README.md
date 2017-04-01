@@ -5,8 +5,8 @@ To setup a store we need to perform three steps:
 
 
 Set it up:
-  A minimal store might be nothing more than an array. Construct and return a
-  class that can maintain the store.
+  A minimal store might be nothing more than an array. Construct and return an
+  ES6+ class that will maintain the store.
 
 Connect it with Alt at Provider:
   Modify the `app/components/Provider/setup.js` so that the new store is added
@@ -14,6 +14,6 @@ Connect it with Alt at Provider:
   ex: `alt.addStore('NoteStore', NoteStore);`
 
 Connect it with App:
-  The whole point of this is to decouple state from the components entirely. To
+  The whole point of this is to decouple state from the components, entirely. To
   accomplish this we'll use the `flux connect` to inject the data store into
-  component in the App export.
+  component for display, at the App's export. (see ../components/App.jsx)

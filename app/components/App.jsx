@@ -51,6 +51,9 @@ class App extends React.Component {
     this._updateNotes(id, fn);
   }
 
+  // Functon: _enableEditing
+  //  Creates a map function to enable editing on the specified id
+  //  and calls <_updateNotes>
   enableEditing = (id) => {
     console.log('enableEditing');
     let fn = (note) => {
@@ -60,6 +63,10 @@ class App extends React.Component {
     this._updateNotes(id, fn);
   }
 
+  // Function: _updateNotes
+  //  Updates state on notes.
+  //  Takes an `id` (optional) and a `func` that will
+  //  map onto the current <notes> array producing a new one.
   _updateNotes = (id, func) => {
     this.setState({
       notes: this.state.notes.map(func)
@@ -67,6 +74,9 @@ class App extends React.Component {
   }
 }
 
+// Use the Flux Connect to connect to the NotesStore data.
+//  Contents of the NotesStore will passed in props to the instance of App
+//  as `notes`
 export default connect(({notes}) => ({
   notes
 }))(App)
