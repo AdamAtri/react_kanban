@@ -7,6 +7,8 @@ import AutoFocusTextInput from './AutoFocusTextInput';
 class App extends React.Component {
 
   render() {
+    // as seen at the bottom of this file, the NoteStore
+    //  is injected into <props> through `connect` 
     const { notes } = this.props;
     return (
       <div>
