@@ -10,6 +10,9 @@ export default (state, actions) => {
   );
 }
 
+// Function: Connect
+//  Connect to Alt through context.
+//  TODO: not optimized - see *AltContainer* and *connect-alt* for optimized solutions
 function connect(state=()=>{}, actions={}, target) {
   class Connect extends React.Component {
     // override

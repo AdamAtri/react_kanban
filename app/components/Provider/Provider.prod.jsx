@@ -3,6 +3,7 @@ import AltContainer from 'alt-container';
 import alt from '../../libs/alt';
 import setup from './setup';
 
+// Connect the NoteStore
 setup(alt);
 
 export default ({children}) =>
