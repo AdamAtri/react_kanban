@@ -9,17 +9,7 @@ export default class NoteStore {
     this.bindActions(NoteActions);
 
     // A minimal data store for notes.
-    this.notes = [
-      {
-        id: uuid.v4(),
-        task: 'Learn some shit',
-        editing: false
-      }, {
-        id: uuid.v4(),
-        task: 'Do some shit',
-        editing: false
-      }
-    ];
+    this.notes = [  ];
   }
 
   // Function: create

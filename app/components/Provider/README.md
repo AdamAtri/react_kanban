@@ -16,4 +16,4 @@ The core of the *Provider Module* is `index.js`.
   there are Provider instances for both development and production).
 
 `AltContainer`, referred to in both the Provider files, enables us to connect
-the data of our application at the component level when we implement `connect`.
+our application data at the component level when we implement `connect`.
