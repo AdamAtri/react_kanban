@@ -3,8 +3,9 @@ import uuid from 'uuid';
 import connect from '../libs/connect';
 import Notes from './Notes';
 import NoteActions from '../actions/NoteActions';
+import LaneActions from '../actions/LaneActions';
 
-const Lane = ({lane, notes, NoteActions, ...props}) => {
+const Lane = ({lane, notes, LaneActions, NoteActions, ...props}) => {
   // Function: addNote
   //  Connects to NoteActions and calls `create`
   const addNote = (e) => {
@@ -14,11 +15,19 @@ const Lane = ({lane, notes, NoteActions, ...props}) => {
       id: noteId,
       task: 'New task'
     });
+    LaneActions.attachToLane({
+      laneId: lane.id,
+      noteId: noteId
+    });
   };
   // Function: deleteNote
   //  Connects to NoteActions to call `delete`
   const deleteNote = (noteId, e) => {
     e.stopPropagation();
+    LaneActions.detachFromLane({
+      laneId: lane.id,
+      noteId: noteId
+    });
     this.props.NoteActions.delete(noteId);
   };
 
@@ -41,7 +50,7 @@ const Lane = ({lane, notes, NoteActions, ...props}) => {
         <div className="lane-name">{lane.name}</div>
       </div>
       <Notes
-        notes={notes}
+        notes={selectNotesByIds(notes, lane.notes)}
         onNoteClick={enableEditing}
         onEdit={editNote}
         onDelete={deleteNote} />
@@ -49,8 +58,14 @@ const Lane = ({lane, notes, NoteActions, ...props}) => {
   );
 };
 
+function selectNotesByIds(allNotes, noteIds=[ ]) {
+  return noteIds.reduce((notes, id) =>
+    notes.concat(allNotes.filter(note => note.id === id)
+  ), [ ]);
+}
+
 // injects the NoteStore as 'notes' into Lanes
 export default connect(
   ({notes}) => ({notes}),
-  { NoteActions }
+  { NoteActions, LaneActions }
 )(Lane)
