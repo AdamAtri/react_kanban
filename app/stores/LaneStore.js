@@ -14,7 +14,6 @@ export default class LaneStore {
       lanes: this.lanes.concat(lane)
     });
   }
-
   attachToLane({laneId, noteId}) {
     this.setState({
       lanes: this.lanes.map((lane) => {
@@ -43,9 +42,19 @@ export default class LaneStore {
     });
   }
 
+  update(updatedLane) {
+    this.setState({
+      lanes: this.lanes.map( lane => {
+        if (lane.id === updatedLane.id)
+          return Object.assign({}, lane, updatedLane);
+        return lane;
+      })
+    });
+  }
+
   delete(laneId) {
     this.setState({
-      lanes: this.lanes.filter((x) => x.id != laneId)
+      lanes: this.lanes.filter( lane => lane.id !== laneId )
     });
   }
 }
