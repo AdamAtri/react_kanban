@@ -5,7 +5,8 @@ import { compose } from 'redux';
 import ItemTypes from '../constants/itemTypes';
 
 // Define the <Note> element
-const Note = ({connectDragSource, connectDropTarget, children, ...props}) => {
+const Note = ({connectDragSource, connectDropTarget,
+               onMove, id, children, ...props}) => {
   return compose(connectDragSource, connectDropTarget)(
     <div {...props}>
       {children}
@@ -20,9 +21,14 @@ const Note = ({connectDragSource, connectDropTarget, children, ...props}) => {
 //  see: https://react-dnd.github.io/react-dnd/docs-drag-source.html
 const noteSource = {
   beginDrag(props, monitor, component) {
-    console.log('begin dragging note', props, monitor, component);
-    return {};
+    console.log('propsid', props.id);
+    const item = { id: props.id };
+    return item;
+  },
+  isDragging(props, monitor) {
+    return monitor.getItem().id === props.id;
   }
+
 };
 // Spec: noteTarget (DropTarget)
 //  NoteTarget is a JS object that descibes how the
@@ -31,9 +37,17 @@ const noteSource = {
 //  see: https://react-dnd.github.io/react-dnd/docs-drop-target.html
 const noteTarget = {
   hover(targetProps, monitor) {
+
+  },
+  drop(targetProps, monitor, component) {
+    const targetId = targetProps.id;
     const sourceProps = monitor.getItem();
-    console.log('dragging note is over me', sourceProps, targetProps);
+    const sourceId = sourceProps.id;
+    if (sourceId !== targetId) {
+      targetProps.onMove({sourceId, targetId});
+    }
   }
+
 }
 
 // export the note in as a draggable item
