@@ -32,8 +32,8 @@ const noteSource = {
 };
 // Spec: noteTarget (DropTarget)
 //  NoteTarget is a JS object that descibes how the
-//  note will respond to having another note dropped onto it.
-//  *all functions here are optional (can also support `drop`, `canDrop`)
+//  note will respond to having a draggable dropped onto it.
+//  *all functions here are optional (can support `hover`, `drop`, and `canDrop`)
 //  see: https://react-dnd.github.io/react-dnd/docs-drop-target.html
 const noteTarget = {
   hover(targetProps, monitor) {
