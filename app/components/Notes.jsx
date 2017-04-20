@@ -1,6 +1,7 @@
 import React from 'react';
 import Note from './Note';
 import Editable from './Editable';
+import LaneActions from '../actions/LaneActions';
 
 // >>>> EXPORT: an unordered list of Editable Notes
 export default ({ notes, onNoteClick=()=>{}, onDelete=()=>{}, onEdit=()=>{} }) => (
@@ -11,7 +12,7 @@ export default ({ notes, onNoteClick=()=>{}, onDelete=()=>{}, onEdit=()=>{} }) =
           className="note"
           onClick={onNoteClick.bind(null, note.id)}
           id={note.id}
-          onMove={({sourceId, targetId}) => console.log('moving from', sourceId, ' to', targetId)}>
+          onMove={LaneActions.move} >
           <Editable
             className="editable"
             editing={note.editing}

@@ -5,7 +5,6 @@ export default class LaneStore {
     this.bindActions(LaneActions);
     this.lanes = [ ];
   }
-
   create(lane) {
     // create an empty array for <Notes> if one wasn't supplied
     //  with <lane>
@@ -14,6 +13,27 @@ export default class LaneStore {
       lanes: this.lanes.concat(lane)
     });
   }
+  update(updatedLane) {
+    this.setState({
+      lanes: this.lanes.map( lane => {
+        if (lane.id === updatedLane.id)
+          return Object.assign({}, lane, updatedLane);
+        return lane;
+      })
+    });
+  }
+  delete(laneId) {
+    this.setState({
+      lanes: this.lanes.filter( lane => lane.id !== laneId )
+    });
+  }
+
+  move({sourceId, targetId}) {
+    console.log(`move source: ${sourceId}, target: ${targetId}`);
+  }
+
+  // Function: attachToLane
+  //  Inserts the provided noteId into the lane's <lane.notes> array
   attachToLane({laneId, noteId}) {
     this.setState({
       lanes: this.lanes.map((lane) => {
@@ -30,7 +50,8 @@ export default class LaneStore {
       })
     });
   }
-
+  // Function: detachFromLane
+  //  Removes the provided noteId into the lane's <lane.notes> array
   detachFromLane({laneId, noteId}) {
     this.setState({
       lanes: this.lanes.map((lane) => {
@@ -42,19 +63,5 @@ export default class LaneStore {
     });
   }
 
-  update(updatedLane) {
-    this.setState({
-      lanes: this.lanes.map( lane => {
-        if (lane.id === updatedLane.id)
-          return Object.assign({}, lane, updatedLane);
-        return lane;
-      })
-    });
-  }
 
-  delete(laneId) {
-    this.setState({
-      lanes: this.lanes.filter( lane => lane.id !== laneId )
-    });
-  }
 }
