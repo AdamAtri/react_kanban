@@ -6,21 +6,21 @@ import LaneActions from '../actions/LaneActions';
 // >>>> EXPORT: an unordered list of Editable Notes
 export default ({ notes, onNoteClick=()=>{}, onDelete=()=>{}, onEdit=()=>{} }) => (
   <ul className="notes">{
-    notes.map((note) =>
-      <li key={note.id}>
-        <Note
-          className="note"
-          onClick={onNoteClick.bind(null, note.id)}
-          id={note.id}
+    // expand <note> in the map closure
+    notes.map(({id, editing, task}) =>
+      <li key={id}>
+        <Note className="note" id={id}
+          editing={editing}
+          onClick={onNoteClick.bind(null, id)}
           onMove={LaneActions.move} >
           <Editable
             className="editable"
-            editing={note.editing}
-            value={note.task}
-            onEdit={onEdit.bind(null, note.id)} />
+            editing={editing}
+            value={task}
+            onEdit={onEdit.bind(null, id)} />
           <button
             className="delete"
-            onClick={onDelete.bind(null, note.id)}>X</button>
+            onClick={onDelete.bind(null, id)}>X</button>
         </Note>
       </li>)
   }</ul>

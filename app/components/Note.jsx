@@ -6,8 +6,11 @@ import ItemTypes from '../constants/itemTypes';
 
 // Define the <Note> element
 const Note = ({connectDragSource, connectDropTarget, isDragging,
-               isOver, onMove, id, children, ...props}) => {
-  return compose(connectDragSource, connectDropTarget)(
+               isOver, onMove, id, editing, children, ...props}) => {
+
+  // Pass through dragging requests if we are editing
+  const dragSource = editing ? a => a : connectDragSource;
+  return compose(dragSource, connectDropTarget)(
     // set the opacity to zero if the note is being dragged or hovered-over
     <div style={{ opacity: isDragging || isOver ? 0 : 1 }} {...props}>
       {children}
@@ -28,7 +31,6 @@ const noteSource = {
   isDragging(props, monitor) {
     return monitor.getItem().id === props.id;
   }
-
 };
 // Spec: noteTarget (DropTarget)
 //  NoteTarget is a JS object that descibes how the
@@ -47,8 +49,7 @@ const noteTarget = {
       targetProps.onMove({sourceId, targetId});
     }
   }
-
-}
+};
 
 // export the note in as a draggable item
 export default compose(
