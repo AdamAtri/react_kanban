@@ -19,6 +19,7 @@ body {
   padding: 1em;
   color: #efefef;
   background-color: #333;
+  border: 1px solid #ccc;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
 }

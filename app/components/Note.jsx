@@ -38,9 +38,6 @@ const noteSource = {
 //  *all functions here are optional (can support `hover`, `drop`, and `canDrop`)
 //  see: https://react-dnd.github.io/react-dnd/docs-drop-target.html
 const noteTarget = {
-  hover(targetProps, monitor) {
-
-  },
   drop(targetProps, monitor, component) {
     const targetId = targetProps.id;
     const sourceProps = monitor.getItem();
