@@ -22,7 +22,6 @@ const Note = ({connectDragSource, connectDropTarget, isDragging,
 //  see: https://react-dnd.github.io/react-dnd/docs-drag-source.html
 const noteSource = {
   beginDrag(props, monitor, component) {
-    console.log('propsid', props.id);
     const item = { id: props.id };
     return item;
   },
@@ -45,9 +44,7 @@ const noteTarget = {
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
     if (sourceId !== targetId) {
-      console.log('call targetProps.onMove');
       targetProps.onMove({sourceId, targetId});
-      console.log('did that');
     }
   }
 
